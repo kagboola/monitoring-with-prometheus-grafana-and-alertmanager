@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    restart: always
+
+  node-exporter:
+    image: prom/node-exporter
+    ports:
+      - 9100:9100
+    restart: always
+   
