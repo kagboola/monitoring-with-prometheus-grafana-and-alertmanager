@@ -6,17 +6,19 @@ services:
 
     ports:
       - 9090:9090
-    restart: always
+
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
     
   alertmanager:
     image: prom/alertmanager:v0.12.0
 
     ports:
       - 9093:9093
-    restart: always
+    restart: unless-stopped
     
   grafana:
-    image: grafana/grafana:5.4.2
+    image: grafana/grafana:7.2.1
 
     ports:
       - 3000:3000
@@ -27,4 +29,6 @@ services:
     ports:
       - 9300:9300
       - 9115:9115
-    restart: unless-stopped
+    volumes:
+      - ./config/blackboxexporter.yml:/etc/blackboxexporter/blackboxexporter.yml
+    restart: unless-stopped  
